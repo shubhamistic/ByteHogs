@@ -1,0 +1,47 @@
+.masters-inputs {
+  height: 600px;
+  width: 480px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 20px;
+  color: tomato;
+  background-color: rgba(0, 0, 0, 0.025);
+
+  .research-toggle-input-container {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .text {
+      margin: 0;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    button {
+      all: unset;
+      height: 30px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.5);
+      border: solid 1px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      background-color: whitesmoke;
+      cursor: pointer;
+      transition: 0.5s ease-in-out background-color;
+
+      &:hover {
+        color: white !important;
+        background-color: tomato !important;
+      }
+    }
+  }
+}

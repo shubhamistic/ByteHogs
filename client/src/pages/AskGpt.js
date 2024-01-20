@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../styles/AskGpt.scss'
 import { askGpt as requestAskGpt } from '../api';
 
-export default function AskGpt() {
+export default function AskGpt(props) {
+  const {
+    changeThemeButtonStatus
+  } = props;
+
   const [inputValue, setInputValue] = useState('');
   const [chatSummary, setChatSummary] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +56,12 @@ export default function AskGpt() {
       >
         {chatSummary.map((chatDetails, index) => (
           <p
-            className={chatDetails.origin}
             key={`chat-${index}`}
+            className={chatDetails.origin}
+            style={{
+              backgroundColor: changeThemeButtonStatus ? "" : "#27282c",
+              color: changeThemeButtonStatus ? "" : "white"
+            }}
           >{chatDetails.text}</p>
         ))}
 
@@ -64,8 +72,17 @@ export default function AskGpt() {
         )}
       </div>
 
-      <div className="chat-input-container">
+      <div
+        className="chat-input-container"
+        style={{
+          borderColor: changeThemeButtonStatus ? "" : "rgba(0, 0, 0, 0.5)"
+        }}
+      >
         <input
+          style={{
+            borderColor: changeThemeButtonStatus ? "" : "rgba(0, 0, 0, 0.5)",
+            color: changeThemeButtonStatus ? "" : "rgba(0, 0, 0, 0.5)"
+          }}
           type="text"
           value={inputValue}
           onChange={handleInputChange}

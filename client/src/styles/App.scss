@@ -12,18 +12,26 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     overflow: auto;
 
+    .heading {
+      margin: 0;
+      padding: 0 5px 5px 5px;
+      font-size: 18px;
+      font-weight: bold;
+      color: dodgerblue;
+    }
+
     nav {
+      position: fixed;
       min-height: 60px;
-      height: 60px;
-      width: 100%;
+      width: max(600px, calc(100% - 400px));
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      background-color: white;
 
       h1 {
         margin: 0;
@@ -43,15 +51,59 @@
     }
 
     .skills-input-container {
-      margin-top: 100px;
       height: max-content;
       width: 80%;
+      margin-top: 110px;
+    }
+
+    .select-career-option-container {
+      height: 50px;
+      width: 80%;
+      margin-top: 50px;
+
+      .select-career-option {
+        height: 100%;
+        width: 480px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .text {
+          width: 300px;
+          margin: 0;
+          font-size: 16px;
+          font-weight: bold;
+          color: tomato;
+        }
+
+        button {
+          all: unset;
+          box-sizing: border-box;
+          height: 40px;
+          padding: 0 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+          font-weight: bold;
+          color: rgba(0, 0, 0, 0.5);
+          border: solid 1px rgba(0, 0, 0, 0.25);
+          border-radius: 5px;
+          cursor: pointer;
+          transition: 0.5s ease-in-out background-color;
+
+          &:hover {
+            color: white !important;
+            background-color: tomato !important;
+          }
+        }
+      }
     }
 
     .more-inputs-container {
-      margin-top: 100px;
       height: max-content;
       width: 80%;
+      margin-top: 50px;
     }
   }
 
