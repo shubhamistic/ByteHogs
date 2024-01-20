@@ -1,7 +1,7 @@
 import requests
 import json
 
-with open("../configs/gpt_config.json", "r") as gpt_config:
+with open("configs/gpt_config.json", "r") as gpt_config:
     gpt_config_data = json.load(gpt_config)
 
     # get api_url and api_key
@@ -20,7 +20,7 @@ def ask_gpt(question):
     data = {
         "model": "gpt-3.5-turbo",
         "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a Career Counsellor."},
             {"role": "user", "content": question}
         ]
     }

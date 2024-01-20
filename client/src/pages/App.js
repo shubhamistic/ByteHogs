@@ -1,17 +1,22 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faXmark, faCircleHalfStroke
+} from '@fortawesome/free-solid-svg-icons';
 import '../styles/App.scss'
-
+import AskGpt from './AskGpt';
+import { searchInArray } from '../utils'
 
 export default function App() {
-  const skills = [
+  const skillsData = [
     "Computer Science", "Electrical Engineering", "Mathematics", "Robotics", "Software Development",
     "Artificial Intelligence", "Machine Learning", "Industrial Design", "Physics", "Data Analysis",
     "Systems Engineering", "Project Management", "Information Technology", "Automated Manufacturing"
   ];
+  const [skills, setSkills] = useState(skillsData);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [changeThemeButtonStatus, setChangeThemeButtonStatus] = useState(true);
   const inputContainerRef = useRef(null);
 
   const handleFocus = ()  => {
@@ -40,18 +45,50 @@ export default function App() {
     return false;
   }
 
+  const handleSearchInputValueChange = (event) => {
+    let newSkills = event.target.value
+      ? searchInArray([...skillsData], event.target.value)
+      : setSkills(skillsData);
+    if (newSkills) {setSkills(newSkills);}
+  }
+
   return (
-    <div className="app">
+    <div
+      className="app"
+      style={{
+        backgroundColor: changeThemeButtonStatus ? "" : "#27282c"
+      }}
+    >
       {/* skills/resume input section */}
       <div className="left-window">
-        <h1>Career Counsellor</h1>
+
+        <nav>
+          <h1>Career Counsellor</h1>
+          <FontAwesomeIcon
+            className="icon"
+            icon={faCircleHalfStroke}
+            onClick={() => setChangeThemeButtonStatus(!changeThemeButtonStatus)}
+            style={{
+              color: changeThemeButtonStatus ? "" : "white"
+            }}
+          />
+        </nav>
+
 
         <div className="input-container">
-          <p>Select Your Skills</p>
+          <p
+            style={{
+              color: changeThemeButtonStatus ? "" : "white"
+            }}
+          >Select Your Skills</p>
 
           <div
             className="skills-input-container"
-            style={{ borderColor: isInputFocused ? "tomato" : "" }}
+            style={{
+              borderColor: changeThemeButtonStatus ?
+                (isInputFocused ? "tomato" : "" ) :
+                (isInputFocused ? "tomato" : "white")
+            }}
             onFocus={handleFocus}
             tabIndex="0"
           >
@@ -69,6 +106,10 @@ export default function App() {
             <input
               ref={inputContainerRef}
               className="selected-skill selected-skill-input"
+              style={{
+                color: changeThemeButtonStatus ? "" : "white"
+              }}
+              onChange={handleSearchInputValueChange}
             />
           </div>
 
@@ -93,15 +134,7 @@ export default function App() {
 
       {/* chatbot container */}
       <div className="right-window">
-        <div className="chat-window-container">
-
-        </div>
-
-        <div className="chat-input-container">
-          <input
-            placeholder="Type Your Question Here"
-          />
-        </div>
+        <AskGpt />
       </div>
     </div>
   );

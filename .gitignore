@@ -27,6 +27,7 @@ yarn-error.log*
 # flask -----------
 server/bin
 server/lib
+server/configs
 server/static
 server/templates
 server/pyvenv.cfg

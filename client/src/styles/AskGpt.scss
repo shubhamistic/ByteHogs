@@ -1,0 +1,59 @@
+.ask-gpt {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: dodgerblue;
+
+  .chat-window-container {
+    height: calc(90% - 50px);
+    width: 90%;
+    overflow: auto;
+
+    .self, .server {
+      max-width: 300px;
+      width: max-content;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      background-color: white;
+    }
+
+    .self {
+      margin-left: auto;
+    }
+
+    .server {
+      .loader {
+        height: 20px;
+        aspect-ratio: 1/1;
+        border-top: 2px solid dodgerblue;
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite;
+      }
+    }
+  }
+
+  .chat-input-container {
+    height: 45px;
+    width: 90%;
+
+    input {
+      all: unset;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      padding: 0 10px;
+      border: solid 2px white;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
