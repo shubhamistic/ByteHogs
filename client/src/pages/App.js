@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import '../styles/App.scss'
@@ -11,6 +11,15 @@ export default function App() {
     "Systems Engineering", "Project Management", "Information Technology", "Automated Manufacturing"
   ];
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const inputContainerRef = useRef(null);
+
+  const handleFocus = ()  => {
+    setIsInputFocused(true);
+    if (inputContainerRef.current) {
+      inputContainerRef.current.focus();
+    }
+  }
 
   const handleSelectSkill = (selectedSkill) => {
     let newSelectedSkills = [...selectedSkills];
@@ -33,15 +42,19 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>Career Counsellor</h1>
-
-
       {/* skills/resume input section */}
       <div className="left-window">
+        <h1>Career Counsellor</h1>
+
         <div className="input-container">
           <p>Select Your Skills</p>
 
-          <div className="skills-input-container">
+          <div
+            className="skills-input-container"
+            style={{ borderColor: isInputFocused ? "tomato" : "" }}
+            onFocus={handleFocus}
+            tabIndex="0"
+          >
             {selectedSkills.map((skill, index) => (
               <div
                 key={`selected-skill-${index}`}
@@ -52,28 +65,44 @@ export default function App() {
                 <FontAwesomeIcon className="icon" icon={faXmark} />
               </div>
             ))}
+
+            <input
+              ref={inputContainerRef}
+              className="selected-skill selected-skill-input"
+            />
           </div>
 
           <div className="skills-list-container">
-            {skills.map((skill, index) => (
-              <button
-                key={`skill-button-${index}`}
-                className="skill-button"
-                style={isSkillSelected(skill) ? {
-                  backgroundColor: 'rgba(0, 0, 0, 0.1',
-                  color: 'rgba(0, 0, 0, 0.5',
-                  cursor: 'not-allowed'
-                } : null}
-                onClick={() => handleSelectSkill(skill)}
-                disabled={isSkillSelected(skill)}
-              >{skill}</button>
-            ))}
+            {isInputFocused && (
+              skills.map((skill, index) => (
+                <button
+                  key={`skill-button-${index}`}
+                  className="skill-button"
+                  style={isSkillSelected(skill) ? {
+                    color: 'rgba(0, 0, 0, 0.25',
+                    cursor: 'not-allowed'
+                  } : null}
+                  onClick={() => handleSelectSkill(skill)}
+                  disabled={isSkillSelected(skill)}
+                >{skill}</button>
+              ))
+            )}
           </div>
         </div>
       </div>
 
       {/* chatbot container */}
-      <div className="right-window"></div>
+      <div className="right-window">
+        <div className="chat-window-container">
+
+        </div>
+
+        <div className="chat-input-container">
+          <input
+            placeholder="Type Your Question Here"
+          />
+        </div>
+      </div>
     </div>
   );
 }

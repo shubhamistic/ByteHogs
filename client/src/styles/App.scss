@@ -1,22 +1,30 @@
 .app {
+  min-height: 600px;
   height: 100%;
+  min-width: 1000px;
   width: 100%;
   display: flex;
 
-  h1 {
-    position: absolute;
-    margin: 0;
-    padding: 10px 0 0 20px;
-    font-size: 50px;
-    color: crimson;
-  }
-
   .left-window {
+    position: relative;
     height: 100%;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+
+    h1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 10px 0 0 20px;
+      font-size: 50px;
+      color: crimson;
+      white-space: nowrap;
+    }
+
 
     .input-container {
       height: max-content;
@@ -34,12 +42,12 @@
         min-height: 50px;
         height: max-content;
         width: 100%;
-        padding: 5px;
+        padding: 5px 10px 10px 5px;
         display: flex;
         flex-wrap: wrap;
-        border: solid 2px tomato;
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.05);
+        align-items: center;
+        border: solid 2px rgba(0, 0, 0, 0.1);
+        background-color: white;
         cursor: text;
 
         .selected-skill {
@@ -52,21 +60,27 @@
           border-radius: 5px;
           background-color: white;
 
+          p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: unset;
+          }
+
+          .icon {
+            padding: 0 5px 0 0;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+
+            &:hover {color: rgba(0, 0, 0, 1);}
+          }
         }
 
-        p {
-          margin: 0;
-          font-size: 14px;
-          font-weight: unset;
-        }
-
-        .icon {
-          padding: 0 5px 0 0;
-          font-size: 14px;
-          color: rgba(0, 0, 0, 0.5);
-          cursor: pointer;
-
-          &:hover {color: rgba(0, 0, 0, 1);}
+        .selected-skill-input {
+          all: unset;
+          height: 25px;
+          flex: 1;
+          margin: 5px 0 0 5px;
         }
       }
 
@@ -74,12 +88,12 @@
         top: 90px;
         height: 160px;
         width: 100%;
-        margin: 20px 0 0 0;
-        border-radius: 10px;
+        //margin: 10px 0 0 0;
         overflow: auto;
 
         .skill-button {
           all: unset;
+          box-sizing: border-box;
           height: 40px;
           width: 100%;
           padding: 0 20px;
@@ -99,6 +113,32 @@
   .right-window {
     height: 100%;
     width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     background-color: dodgerblue;
+
+    .chat-window-container {
+      height: calc(90% - 50px);
+      width: 90%;
+      //background-color: tomato;
+    }
+
+    .chat-input-container {
+      height: 50px;
+      width: 90%;
+
+      input {
+        all: unset;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        padding: 0 10px;
+        border: solid 2px white;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    }
   }
 }
